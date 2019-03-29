@@ -33,7 +33,7 @@ inquire
 	]).then(function(response){
 		switch(response.action){
 			case "* View Products for Sale":
-				connection.query('SELECT id, product_name, price, stock_quantity FROM products', function(error, data, fields){
+				connection.query('SELECT id, product_name, FORMAT(price, 2) AS price, stock_quantity FROM products', function(error, data, fields){
 					if(error) throw error;
 					printTable(data);
 					connection.end();
@@ -53,7 +53,7 @@ inquire
 			break;
 
 			case "* Add to Inventory":
-				connection.query('SELECT id, product_name, price, stock_quantity FROM products', function(error, data, fields){
+				connection.query('SELECT id, product_name, FORMAT(price,2) AS price, stock_quantity FROM products', function(error, data, fields){
 					if(error) throw error;
 					printTable(data);
 					inquire
