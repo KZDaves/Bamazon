@@ -103,7 +103,7 @@ inquire
 						name: "stock"
 					}
 					]).then(function(response){
-						connection.query('INSERT INTO products(product_name, department_name, price, stock_quantity) VALUES (?, ?, ?, ?)', [response.name, response.department, response.price, response.stock], function(error, data, fields){
+						connection.query('INSERT INTO products(product_name, department_name, price, stock_quantity, product_sales) VALUES (?, ?, ?, ?, 0)', [response.name, response.department, response.price, response.stock], function(error, data, fields){
 								if(error) throw error;
 								console.log("New item successfully added to database"); 
 							});

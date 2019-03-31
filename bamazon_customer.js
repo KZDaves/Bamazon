@@ -25,7 +25,7 @@ function printTable(results){
 
 connection.connect();
 
-connection.query('SELECT id, product_name, FORMAT(price, 2) AS price, stock_quantity FROM `products` WHERE stock_quantity >0', function (error, data, fields) {
+connection.query('SELECT id, product_name, FORMAT(price, 2) AS price, stock_quantity FROM `products`', function (error, data, fields) {
   if (error) throw error;
   printTable(data);
   inquire
@@ -46,7 +46,7 @@ connection.query('SELECT id, product_name, FORMAT(price, 2) AS price, stock_quan
         connection.query('UPDATE `products` SET stock_quantity = stock_quantity-?, product_sales= product_sales+(price*?) WHERE id = ?', [response.purchase_qty, response.purchase_qty, response.purchase_id], function(error, results, fields){
           if(error) throw error;
         }); 
-  			console.log("Your total was: $" + data[response.purchase_id-1].price*response.purchase_qty);
+  			console.log("Your total was: $" + (data[response.purchase_id-1].price*response.purchase_qty).toFixed(2));
   		}else{
   			console.log("Sorry, insufficient supply available to meet your order. Purchase unsuccessful.");
   		}	
